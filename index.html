@@ -79,7 +79,7 @@
         .hero-content {
             max-width: 1200px; /* Augmenté pour accommoder l'image */
             display: flex;
-            align-items: center;
+            align-items: start;
             gap: 4rem;
             animation: fadeIn 1s ease-out;
         }
@@ -150,9 +150,10 @@
     }
 
     /* Media query pour la responsivité ------------------------768px*/
-    @media (max-width: 768px) {
+    @media (max-width: 768px), (max-width: 480px) {
         .hero-content {
             flex-direction: column;
+            align-items: center;
             text-align: center;
             gap: 2rem;
         }
@@ -552,6 +553,16 @@
             
         }
 
+        .btn {
+            padding: 0.8rem 1.5rem;
+            background-color: #4f46e5;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
 
         .btn:hover {
             background-color: #4338ca;
