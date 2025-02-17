@@ -106,7 +106,7 @@
             margin-bottom: 2rem;
         }
 
-    /* Media query pour la responsivité */
+    /* Media query pour la responsivité ------------------------768px*/
     @media (max-width: 768px) {
         .hero-content {
             flex-direction: column;
@@ -118,44 +118,44 @@
             width: 100.6px;
             height: 288px;
         }
-        #presentation {
-        padding: 4rem 1.5rem;
+
+        .presentation-content {
+            display: flex;
+            flex-direction: column;
+            /*align-items: center;*/
+            text-align: center; /* Ajouté pour centrer le texte */
         }
 
-        .section-title {
-            font-size: 1.75rem;
-            margin-bottom: 2rem;
-        }
-
-        .presentation-text p {
-            font-size: 1rem;
-            margin-bottom: 1.2rem;
-        }
-    }
-    @media (max-width: 480px) {
-        #presentation {
-            padding: 3rem 1rem;
-        }
-
-        .section-title {
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .presentation-text p {
-            text-align: left;
+        .presentation-content h1 {
+            order: -1;
             margin-bottom: 1rem;
         }
     }
+
+    /* Media query pour la responsivité ------------------------480px*/
+    @media (max-width: 480px) {
+        .presentation-content {
+        display: flex;
+        flex-direction: column;
+        align-items: auto;
+        /*text-align: center;*/
+        }
+
+        .presentation-content h1 {
+            order: -1;
+            margin-bottom: 1rem;
+        }
+    }
+    /*------------------------------------------------------------------*/
         .presentation-content {
             max-width: 1200px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: 1fr 1.5fr;
+            grid-template-columns:  1.5fr;
             gap: 0rem;
         }
 
-        /* Sections de contenu */
+        /* Sections de contenu --------------------------  DIPLOMES*/
 
         .diplomes-section {
             padding: 5rem 2rem;
@@ -221,6 +221,8 @@
             color: white;
         }
 
+
+        /* Sections de contenu --------------------------  FORMATION*/
         section {
             padding: 5rem 2rem;
         }
@@ -285,7 +287,7 @@
         .competences-list li:nth-child(5) { animation-delay: 0.5s; }
         .competences-list li:nth-child(6) { animation-delay: 0.6s; }
 
-        /* Styles pour la section Mes experiences*/
+        /* Styles pour la section --------------------------------------Mes experiences*/
         .experiences-section {
             padding: 5rem 2rem;
             background-color: white;
