@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon E-Portfolio</title>
+    <style>
+        /* Reset et styles de base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Header et Navigation */
+        header {
+            background: linear-gradient(135deg, #6366f1, #4f46e5);
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+
+        /* Section Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: left; /* Changé de center à left */
+            padding: 6rem 2rem;
+            background-color: #f8f9fa;
+        }
+
+        .hero-content {
+            max-width: 1200px; /* Augmenté pour accommoder l'image */
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .hero-image {
+            width: 302px; /* Ajustez selon la taille souhaitée */
+            height: 864px; /* Ajustez selon la taille souhaitée */
+            flex-shrink: 0;
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #1a1a1a;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+    /* Media query pour la responsivité */
+    @media (max-width: 768px) {
+        .hero-content {
+            flex-direction: column;
+            text-align: center;
+            gap: 2rem;
+        }
+
+        .hero-image {
+            width: 200px;
+            height: 200px;
+        }
+    }
+
+
+        .presentation-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 2rem;
+        }
+
+        /* Sections de contenu */
+
+        .diplomes-section {
+            padding: 5rem 2rem;
+            background-color: #f8f9fa;
+        }
+
+        .diplomes-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 2rem;
+        }
+
+        .diplomes-list {
+            list-style: none;
+        }
+
+        .diplome-item {
+            padding: 1rem;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .diplome-item:hover {
+            background-color: #e9ecef;
+            transform: translateX(10px);
+        }
+
+        .annees-list {
+            list-style: none;
+            margin-left: 1.5rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .annees-list li {
+            margin: 0.5rem 0;
+        }
+
+        .diplome-details {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            min-height: 300px;
+        }
+
+        .diplome-details h3 {
+            color: #4f46e5;
+            margin-bottom: 1rem;
+        }
+
+        .diplome-details p {
+            line-height: 1.8;
+        }
+
+        /* Style actif pour le diplôme sélectionné */
+        .diplome-item.active {
+            background-color: #4f46e5;
+            color: white;
+        }
+
+        section {
+            padding: 5rem 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .formation-contents{
+            margin-bottom: 4rem;
+        }
+
+        .formation-under-list{
+            text-align: center;
+            margin-bottom: 1rem;            
+        }
+
+        /* Ajout des styles pour la liste de compétences */
+        .competences-list {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 1rem;
+        }
+
+        .competences-list li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+        }
+
+        .competences-list li::before {
+            content: "•";
+            color: #4f46e5;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        /* Animation pour l'apparition des compétences */
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .competences-list li {
+            animation: fadeInLeft 0.3s ease-out forwards;
+        }
+
+        .competences-list li:nth-child(1) { animation-delay: 0.1s; }
+        .competences-list li:nth-child(2) { animation-delay: 0.2s; }
+        .competences-list li:nth-child(3) { animation-delay: 0.3s; }
+        .competences-list li:nth-child(4) { animation-delay: 0.4s; }
+        .competences-list li:nth-child(5) { animation-delay: 0.5s; }
+        .competences-list li:nth-child(6) { animation-delay: 0.6s; }
+
+        /* Styles pour la section Mes experiences*/
+        .experiences-section {
+            padding: 5rem 2rem;
+            background-color: white;
+        }
+
+        .experiences-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+        }
+
+        .experiences-list {
+            list-style: none;
+            max-height: 600px;
+            overflow-y: auto;
+            padding-right: 1rem;
+        }
+
+        .experiences-list::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .experiences-list::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 3px;
+        }
+
+        .experiences-list::-webkit-scrollbar-thumb {
+            background: #4f46e5;
+            border-radius: 3px;
+        }
+
+        .experience-item {
+            padding: 1rem;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .experience-item:hover {
+            background-color: #e9ecef;
+            transform: translateX(10px);
+        }
+
+        .experience-dates {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+
+        .experience-details {
+            background-color: #f8f9fa;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .experience-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .carousel-images {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .carousel-image {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .carousel-image.active {
+            opacity: 1;
+        }
+
+        .carousel-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 1rem;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: background-color 0.3s ease;
+            z-index: 2;
+        }
+
+        .carousel-button:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .carousel-button.prev {
+            left: 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .carousel-button.next {
+            right: 0;
+            border-radius: 4px 0 0 4px;
+        }
+
+        .savoir-plus-btn {
+            align-self: flex-end; /* Changé de flex-start à flex-end */
+            padding: 0.8rem 1.5rem;
+            background-color: #4f46e5;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            margin-top: 1rem; /* Ajouté pour créer un peu d'espace avec le contenu au-dessus */
+        }
+
+        .savoir-plus-btn:hover {
+            background-color: #4338ca;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .experiences-container {
+                grid-template-columns: 1fr;
+            }
+
+            .experience-details {
+                order: -1;
+            }
+
+            .carousel-container {
+                height: 300px;
+            }
+        }
+
+        /* Carte de projet */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            background-color: #ddd;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        /* Bouton */
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background-color: #4f46e5;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #4338ca;
+            transform: translateY(-2px);
+        }
+
+        #btn_diplome_box {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            position: relative;
+            top: 10px;
+            left: 535px;
+            
+        }
+
+        /* Contact section */
+        .contact {
+            background-color: #f8f9fa;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .diplomes-container {
+                grid-template-columns: 1fr;
+            }
+
+            .diplome-details {
+                order: -1;
+                margin-bottom: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="#" class="logo">Mon E-Portfolio</a>
+            <div class="nav-links">
+                <a href="#accueil">Accueil</a>
+                <a href="#diplomes">Ma Formation</a>
+                <a href="#experiences">Experiences</a>
+                <a href="#réalisations">Réalisations</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero" id="accueil">
+        <div class="hero-content">
+            <img src="Pictures\bodySeb2.png" alt="Photo de profil" class="hero-image">
+            <div class="hero-text">
+                <h1>Sébastien BOULEVARD</h1>
+                <p>Dr. en physique énergétique | Spécialité hydrogène</p>
+                <a href="#contact" class="btn">Me Contacter</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="presentation">
+        <div class="presentation-content">
+            <h1>Présentation</h1>
+            <p> Docteur en sciences de l'hydrogène, spécialisé dans les systèmes de stockage de l’énergie, avec un accent particulier sur les électrolyseurs PEM.
+                Au cours de ma thèse, j’ai acquis une expertise approfondie dans les électrolyseurs PEM, en utilisant des techniques de caractérisation avancées telles que l’analyse de SIE et les courbes de polarisation. J'ai également appliqué diverses techniques d’imagerie pour concevoir, modéliser, fabriquer et tester des électrolyseurs, tout en procédant à leur optimisation en fonction des conditions environnementales.
+                Fort de cette expérience, j'ai développé de solides compétences en gestion et réalisation de projets. Je suis reconnu pour ma capacité d’adaptation, mon esprit d'équipe et mon aptitude à mener des projets complexes avec succès.
+
+            </p>
+        </div>
+    </section>
+
+    <section id="diplomes" class="diplomes-section">
+        <h2 class="section-title">Ma Formation</h2>
+        <div class="diplomes-container">
+            <ul class="diplomes-list">
+                <li class="diplome-item" data-id="diplome1">
+                    2022 - Doctorat en Physique Énergétique
+                    <ul class="annees-list">
+                        <li>2022-2023</li>
+                    </ul>
+                </li>
+                <li class="diplome-item" data-id="diplome2">
+                    2016 - Master Énergie
+                    <ul class="annees-list">
+                        <li>2018-2021</li>
+                    </ul>
+                </li>
+                <li class="diplome-item" data-id="diplome3">
+                    2014 - Licence Sciences Pour l'Ingénieur
+                    <ul class="annees-list">
+                        <li>2016-2018</li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="diplome-details">
+                <h3>Sélectionnez un diplôme</h3>
+                <p>Survolez un diplôme pour voir les détails.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="experiences" class="experiences-section">
+        <h2 class="section-title">Mes Expériences</h2>
+        <div class="experiences-container">
+            <ul class="experiences-list">
+                <li class="experience-item" data-id="exp1">
+                    2020 - Enseignant vacataire en électromagnétisme
+                    <div class="experience-dates">2023 - Présent</div>
+                </li>
+                <li class="experience-item" data-id="exp2">
+                    2019 - Concepteur - Designer 
+                    <div class="experience-dates">2023 - Présent</div>
+                </li>
+                <li class="experience-item" data-id="exp3">
+                    2019 - Exposant au FDFC
+                    <div class="experience-dates">2022 - 2023</div>
+                </li>
+                <li class="experience-item" data-id="exp4">
+                    2018 - Exposant du secteur hydrogène (Piles à Combustible et applications dans l’aéronautique)
+                    <div class="experience-dates">2021 - 2022</div>
+                </li>
+                <li class="experience-item" data-id="exp5">
+                    2018 - Exposant au Groupement De Recherche du CNRS (HySPàC)
+                    <div class="experience-dates">2020 - 2021</div>
+                </li>
+                <li class="experience-item" data-id="exp6">
+                    2018 - Enseignant vacataire en environnement de calcul numérique et scientifique
+                    <div class="experience-dates">2019 - 2020</div>
+                </li>
+                <li class="experience-item" data-id="exp7">
+                    2017 - Exposant pour la Fête de la Science sur la pile à combustible
+                    <div class="experience-dates">2018 - 2019</div>
+                </li>
+                <li class="experience-item" data-id="exp8">
+                    2016 - Stage de recherche - météorologie
+                    <div class="experience-dates">2017 - 2018</div>
+                </li>
+                <li class="experience-item" data-id="exp9">
+                    2015 - Stage de recherche - météorologie
+                    <div class="experience-dates">2017</div>
+                </li>
+                <li class="experience-item" data-id="exp10">
+                    Stage Développeur Web - Entreprise I
+                    <div class="experience-dates">2016</div>
+                </li>
+            </ul>
+            <div class="experience-details">
+                <div class="experience-content">
+                    <h3>Sélectionnez une expérience</h3>
+                    <p>Survolez une expérience pour voir les détails.</p>
+                    <button class="savoir-plus-btn">En savoir plus</button>
+                </div>
+                <div class="carousel-container">
+                    <button class="carousel-button prev">❮</button>
+                    <button class="carousel-button next">❯</button>
+                    <div class="carousel-images">
+                        <!-- Les images seront injectées ici par le JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+    <section id="formation">
+        <h2 class="section-title">Mes expériences</h2>
+        <div class="projects-grid">
+            <ul class="formation-contents">
+                <li><h4>2021 - Doctorat - Physique énergétique -</h4></li>
+                
+                <li><h4>2016 - Master - Énergie -</h4>
+                    <ul class="formation-under-list">
+                        <li> slkjb</li>
+                        <li> kkjs</li>                      
+                    </ul>
+                </li>
+                <li><h4>2014 - Licence - Sciences pour l'ingénieur -</h4></li>
+                <li></li>
+            </ul>
+            <article class="project-card">
+                <div class="project-image"></div>
+            </article>
+
+        </div>
+    </section>
+
+    <section id="projets">
+        <h2 class="section-title">Mes Réalisations</h2>
+        <div class="projects-grid">
+            <article class="project-card">
+                <div class="project-image"></div>
+                <div class="project-content">
+                    <h3>Projet 1</h3>
+                    <p>Description du projet. Expliquez ici ce que vous avez réalisé.</p>
+                    <a href="#" class="btn">Voir plus</a>
+                </div>
+            </article>
+            <article class="project-card">
+                <div class="project-image"></div>
+                <div class="project-content">
+                    <h3>Projet 2</h3>
+                    <p>Description du projet. Expliquez ici ce que vous avez réalisé.</p>
+                    <a href="#" class="btn">Voir plus</a>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <h2 class="section-title">Me Contacter</h2>
+        <form class="contact-form">
+            <div class="form-group">
+                <label for="name">Nom</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="btn">Envoyer</button>
+        </form>
+    </section>
+
+    <script>
+        const diplomesData = {
+            diplome1: {
+                titre: "Doctorat en Physique Énergétique",
+                description: "Travaux de recherche sur les systèmes hybrides d'EnR,  et gestion de projet. Spécialisation des systèmes de production de l'hydrogène avec réalisation de projets concrets en laboratoire.",
+                competences: [
+                    "Systèmes PEMFC et PEMWE", 
+                    "Gestion de Projet", 
+                    "Conception, prototypage et test", 
+                    "Communication scientifique"]
+                
+            },
+            diplome2: {
+                titre: "Master Énergie",
+                description: "Formation complète couvrant les aspects fondamentaux des convertisseurs d'énergie, elle est spécialisé dans la gestion et l'optimisation des systèmes énergétiques. Formation pluridisciplinaire alliant une expertise technique en énergies renouvelables et une maîtrise des outils d'intelligence artificielle appliqués à la prévision énergétique.",
+                competences: [
+                    "Métrologie et contrôle des systèmes énergétiques",
+                    "Technologies d'énergies renouvelables : systèmes photovoltaïques, éoliens, et transferts radiatifs",
+                    "Intelligence Artificielle et Machine Learning",
+                    "Smart grids et réseaux de capteurs",
+                    "Systèmes de stockage d'énergie (batteries, filière hydrogène)",
+                    "Expérience en modélisation et analyse prédictive appliquées aux systèmes énergétiques (Méthodes heuristique, réseau de neurones)"
+                    ]
+            },
+            diplome3: {
+                titre: "Licence Sciences Pour L'ingénieur",
+                description: "Formation initiale en informatique couvrant les bases de la programmation, des systèmes d'information et des réseaux. Introduction aux méthodologies de développement.",
+                competences: ["Algorithmique", "Programmation", "Réseaux", "Systèmes"]
+            }
+        };
+
+        document.querySelectorAll('.diplome-item').forEach(item => {
+        item.addEventListener('mouseenter', () => {
+            document.querySelectorAll('.diplome-item').forEach(di => di.classList.remove('active'));
+            item.classList.add('active');
+            
+            const diplomeId = item.getAttribute('data-id');
+            const diplomeInfo = diplomesData[diplomeId];
+            const detailsContainer = document.querySelector('.diplome-details');
+            
+            detailsContainer.innerHTML = `
+                <h3>${diplomeInfo.titre}</h3>
+                <p>${diplomeInfo.description}</p>
+                <p><strong>Compétences clés :</strong></p>
+                <ul class="competences-list">
+                    ${diplomeInfo.competences.map(comp => `<li>${comp}</li>`).join('')}
+                </ul>
+                <a href="#" id="btn_diplome_box" class="btn">Voir plus</a>
+            `;
+        });
+    });
+
+ // Données des expériences
+ const experiencesData = {
+        exp1: {
+            titre: "Enseignant vacataire en électromagnétisme",
+            description: 
+                "Cours et travaux pratiques sur les lois de l'électromagnétisme pour la 1ère année Cycle préparatoire intégré à École Supérieure d'Ingénieurs Réunion Océan Indien (ESIROI);",
+            realisations: [
+                "Cours sur les bases de l'électromagnétisme",
+                "Travaux Pratique sur la force de Laplace, la loi de Biot & Savart, l'induction électromagnétique et les transformateurs"
+            ],
+            images: [
+                "./Pictures/electromag1.png",
+                "./Pictures/electromag6.png",
+                "./Pictures/electromag3.png"
+            ],
+            lienSavoirPlus: "#" // URL pour en savoir plus
+            },
+        exp2: {
+            titre: "Concepteur - Designer (Thèse)",
+            description: "Veille technologique sur les réacteur à hydrogène. Design, simulation et développement de prototypes de mono cellules d'électrolyseur PEM. Élaboration de la documentation technique ; étude de faisabilité ; identification d’éléments pour l'optimisation ; validation du prototype final ; recherche de fournisseurs locaux et internationaux ; fabrication et exécution des tests;",
+            realisations: [
+                "Design, conception de modèle 3D et simulation sur SolidWorks",
+                "Recherche et contact de fournisseurs et entreprise pour l'achat et la fabrication des pièces",
+                "Montage de monocellule d'électrolyseur PEM",
+                "Etablissement de feuille de route pour les tests",
+                "Tests et optimisation",
+                "Mise en forme, interpretation et présentation des données extraites"
+            ],
+            images: [
+                "./Pictures/VueEclate.png",
+                "./Pictures/ElectrolyseurDemonte.jpg",
+                "./Pictures/banctest.jpg"
+            ],
+            lienSavoirPlus: "#" // URL pour en savoir plus
+            },
+        exp3: {
+            titre: "Exposant au FDFC",
+            description: "Participation à la 8ème conférence international 'Fundamentals & Development of Fuel Cells' : présentation de l’étude des régimes fluidiques au sein d'un électrolyseur PEM et les méthodes de caractérisation non intrusive (analyse du bruit électrochimique).",
+            realisations: [
+                "Communication scientifique sous forme de poster, et interraction avec le public scientifique",
+                "Echange et discution sur certaines problématique et élargissement de mon réseau"
+            ],
+            images: [
+                "./Pictures/fdfc2019.gif"
+            ],
+            lienSavoirPlus: "#" // URL pour en savoir plus
+        },
+        exp4: {
+            titre: "Exposant secteur hydrogène - Piles à Combustible et applications dans l’aéronautique -",
+            description: "À l’occasion des 70ans de l’ISAE-ENSMA au Futuroscope Chasseneuil",
+            realisations: [
+                "Présentation d'un démonstrateur de pile à combustible de 1 kW",
+                "Expliquer l'importance de l'hydrogène dans le secteur de l'aéronautique"
+            ],
+            images: [
+                "./Pictures/70ansEnsma2.jpg",
+                "https://www.cge.asso.fr/wp-content/uploads/2018/09/flyer-70-ans-ISAE-ENSMA-1-re.jpg",
+                "https://www.ensma.fr/wp-content/uploads/2016/08/pano-ENSMA.jpg"
+            ],
+            lienSavoirPlus: "#" // URL pour en savoir plus
+        },
+        exp5: {
+            titre: "Exposant au Groupement De Recherche du CNRS (HySPàC) ",
+            description: "Exposition et présentation sur l’étude réalisée sur la faisabilité d’une pile à combustible Réversible à trois chambres;",
+            realisations: [
+                "Communication scientifique et interraction avec le public scientifique",
+                "Echange et discution sur certaines problématique avec des experts du domaine"
+            ],
+            images: [
+                "./Pictures/70ansEnsma2.jpg",
+                "https://www.cge.asso.fr/wp-content/uploads/2018/09/flyer-70-ans-ISAE-ENSMA-1-re.jpg",
+                "https://www.ensma.fr/wp-content/uploads/2016/08/pano-ENSMA.jpg"
+            ],
+            lienSavoirPlus: "#" // URL pour en savoir plus
+        },
+        exp6: {
+            titre: "Enseignant vacataire en environnement de calcul numérique et scientifique pour la licence 2ème année d’EEEA (Électronique Énergie Électrique Automatique)",
+            description: "Exposition et présentation sur l’étude réalisée sur la faisabilité d’une pile à combustible Réversible à trois chambres;",
+            realisations: [
+                "Réalisation de cours sur les bases de la programation LABVIEW",
+                "Travaux pratiques sur la création de VI et acquisition de données (datalogueur)"
+            ],
+            images: [
+                "./Pictures/CalculNum3.png"
+            ],
+            lienSavoirPlus: "#" // URL pour en savoir plus
+        },
+        
+    exp7: {
+            titre: "Enseignant vacataire en environnement de calcul numérique et scientifique pour la licence 2ème année d’EEEA (Électronique Énergie Électrique Automatique)",
+            description: "Exposition et présentation sur l’étude réalisée sur la faisabilité d’une pile à combustible Réversible à trois chambres;",
+            realisations: [
+                "Réalisation de cours sur les bases de la programation LABVIEW",
+                "Travaux pratiques sur la création de VI et acquisition de données (datalogueur)"
+            ],
+            images: [
+                "https://www.energylab.re/wp-content/uploads/2018/02/image-309-Retaill-e1538373583860.jpg "
+            ],
+            lienSavoirPlus: "#" // URL pour en savoir plus
+        },
+    };
+
+    let currentImageIndex = 0;
+    let autoplayInterval;
+    let currentExperience = null;
+
+    function updateCarousel(images) {
+        const carouselContainer = document.querySelector('.carousel-images');
+        carouselContainer.innerHTML = images.map((src, index) => `
+            <img src="${src}" 
+                 alt="Image ${index + 1}" 
+                 class="carousel-image ${index === 0 ? 'active' : ''}"
+            >
+        `).join('');
+        currentImageIndex = 0;
+        startAutoplay();
+    }
+
+    function showImage(index) {
+        const images = document.querySelectorAll('.carousel-image');
+        images.forEach(img => img.classList.remove('active'));
+        currentImageIndex = (index + images.length) % images.length;
+        images[currentImageIndex].classList.add('active');
+    }
+
+    function startAutoplay() {
+        clearInterval(autoplayInterval);
+        autoplayInterval = setInterval(() => {
+            showImage(currentImageIndex + 1);
+        }, 4000);
+    }
+
+    document.querySelector('.prev').addEventListener('click', () => {
+        clearInterval(autoplayInterval);
+        showImage(currentImageIndex - 1);
+        startAutoplay();
+    });
+
+    document.querySelector('.next').addEventListener('click', () => {
+        clearInterval(autoplayInterval);
+        showImage(currentImageIndex + 1);
+        startAutoplay();
+    });
+
+    document.querySelectorAll('.experience-item').forEach(item => {
+        item.addEventListener('mouseenter', () => {
+            document.querySelectorAll('.experience-item').forEach(di => di.classList.remove('active'));
+            item.classList.add('active');
+            
+            const expId = item.getAttribute('data-id');
+            const expInfo = experiencesData[expId];
+            currentExperience = expInfo;
+            
+            const detailsContainer = document.querySelector('.experience-content');
+            detailsContainer.innerHTML = `
+                <h3>${expInfo.titre}</h3>
+                <p>${expInfo.description}</p>
+                <p><strong>Réalisations principales :</strong></p>
+                <ul class="competences-list">
+                    ${expInfo.realisations.map(real => `<li>${real}</li>`).join('')}
+                </ul>
+                <button class="savoir-plus-btn" onclick="window.location.href='${expInfo.lienSavoirPlus}'">
+                    En savoir plus
+                </button>
+            `;
+
+            updateCarousel(expInfo.images);
+        });
+    });
+
+    // Initialiser le carousel avec la première expérience
+    const firstExp = document.querySelector('.experience-item');
+    if (firstExp) {
+        firstExp.dispatchEvent(new Event('mouseenter'));
+    }
+
+</script>
+
+</body>
+</html>
