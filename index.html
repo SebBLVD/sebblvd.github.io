@@ -559,7 +559,7 @@
             .realisation-section-title {
                 grid-column: 1 / -1; /* Fait en sorte que le titre prenne toute la largeur */
                 margin-left: 0; /* Retire la marge existante */
-                margin-bottom: 1rem;
+                margin-bottom: 0.5rem;
                 margin-top: 3rem;
                 padding-left: 1rem; /* Ajoute un peu d'espace à gauche */
             }
@@ -711,6 +711,13 @@
                     order: -1;
                     margin-bottom: 2rem;
                 }
+            }
+
+            .form-message {
+                margin-top: 1rem;
+                padding: 1rem;
+                border-radius: 4px;
+                text-align: center;
             }
     </style>
 </head>
@@ -933,7 +940,7 @@
 
     <section id="contact" class="contact">
         <h2 class="section-title">Me Contacter</h2>
-        <form class="contact-form">
+        <form class="contact-form" id="contactForm" action="traitement_contact.php" method="POST">
             <div class="form-group">
                 <label for="name">Nom</label>
                 <input type="text" id="name" name="name" required>
@@ -947,6 +954,7 @@
                 <textarea id="message" name="message" rows="5" required></textarea>
             </div>
             <button type="submit" class="btn">Envoyer</button>
+            <div id="formMessage" class="form-message"></div>
         </form>
     </section>
 
@@ -1177,6 +1185,31 @@
     if (firstExp) {
         firstExp.dispatchEvent(new Event('mouseenter'));
     }
+
+
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const formData = new FormData(this);
+    const messageDiv = document.getElementById('formMessage');
+    
+    fetch('traitement_contact.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.text())
+    .then(data => {
+        messageDiv.innerHTML = data;
+        messageDiv.style.color = 'green';
+        if (data.includes('succès')) {
+            this.reset();
+        }
+    })
+    .catch(error => {
+        messageDiv.innerHTML = "Une erreur est survenue. Veuillez réessayer.";
+        messageDiv.style.color = 'red';
+    });
+});
 
 </script>
 
