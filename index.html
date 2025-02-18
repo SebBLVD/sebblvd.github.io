@@ -84,6 +84,7 @@
             animation: fadeIn 1s ease-out;
         }
 
+
         .hero-image {
             width: 302px; /* Ajustez selon la taille souhaitée */
             height: 864px; /* Ajustez selon la taille souhaitée */
@@ -92,6 +93,9 @@
 
         .hero-text {
             flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
         }
 
         .hero h1 {
@@ -105,6 +109,30 @@
             font-size: 1.25rem;
             color: #666;
             margin-bottom: 2rem;
+        }
+
+        .temp-image-container {
+            /*display: none;            /*DESACTIVER EN TRAVAUX*/
+            margin-top: 2rem;
+            width: 100%;
+            max-width: 600px;
+            height: 300px;
+            background-color: #ddd; /* Couleur de fond en attendant l'image */
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .temp-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @media (max-width: 768px) {
+            .temp-image-container {
+                max-width: 100%;
+                height: 200px;
+            }
         }
 
         @media (max-width: 768px) {
@@ -262,6 +290,18 @@
                 box-shadow: 0 4px 6px rgba(0,0,0,0.1);
                 min-height: 300px;
                 position: relative;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+
+            .diplome-content {
+                flex: 1;
+            }
+
+            .button-container {
+                margin-top: 3rem;
+                text-align: right;
             }
 
             .diplome-details h3 {
@@ -537,14 +577,19 @@
                 transform: translateY(-5px);
             }
 
-            .competences-image {
-                width: 100%;
-                height: 200px;
-                background-color: #ddd;
-            }
-
             .competences-content {
                 padding: 1.5rem;
+            }
+
+            /* Modifier le style existant ou ajouter ces règles */
+            .competences-under-list {
+                list-style: none; /* Enlève les puces */
+                padding-left: 1.5rem; /* Ajoute un décalage à gauche */
+                margin-top: 0.5rem; /* Ajoute un peu d'espace au-dessus de la liste */
+            }
+
+            .competences-under-list li {
+                margin-bottom: 0.5rem; /* Espace entre les éléments de la liste */
             }
 
             /* Carte de projet */
@@ -742,6 +787,9 @@
                 <h1>Sébastien BOULEVARD</h1>
                 <p>Dr. en physique énergétique | Spécialité hydrogène</p>
                 <a href="#contact" class="btn">Me Contacter</a>
+                <div class="temp-image-container">
+                    <img src="https://www.site.ac-aix-marseille.fr/reseau-lanerthe/spip/sites/www.site/reseau-lanerthe/spip/local/cache-vignettes/L480xH270/3946fa2203e8af9345c5ee21573242-a3468.jpg?1735763470" alt="Image temporaire" class="temp-image">
+                </div>
             </div>
         </div>
     </section>
@@ -854,19 +902,30 @@
         <h2 class="section-title">Mes compétences</h2>
         <div class="competences-grid">
             <ul class="competences-contents">
-                <li><h4>Hard Skills -</h4></li>
+                <li><h4>Hard Skills -</h4>
+                    <ul class="competences-under-list">
+                        <li> Electrolyseur PEM (PEMWE)</li>
+                        <li> EIS Analyseur</li>
+                        <li> Analyse de données</li> 
+                        <li> Gestion de projets</li>                    
+                    </ul>
+                </li>
                 
                 <li><h4>Soft Skills -</h4>
                     <ul class="competences-under-list">
-                        <li> slkjb</li>
-                        <li> kkjs</li>                      
+                        <li> Créativité</li>
+                        <li> Autonomie</li>
+                        <li> Résolution de problèmes</li> 
+                        <li> Polyvalence</li>                    
                     </ul>
                 </li>
-                <li><h4>2014 - Licence - Sciences pour l'ingénieur -</h4></li>
+                <li><h4>fefd</h4></li>
                 <li></li>
             </ul>
             <article class="competences-card">
-                <div class="competences-image"></div>
+                <div class="competences-image">
+                    <canvas id="radarChart"></canvas>
+                </div>
             </article>
 
         </div>
@@ -961,7 +1020,7 @@
         const diplomesData = {
             diplome1: {
                 titre: "Doctorat en Physique Énergétique",
-                description: "Travaux de recherche sur les systèmes hybrides d'EnR,  et gestion de projet. Spécialisation des systèmes de production de l'hydrogène avec réalisation de projets concrets en laboratoire.",
+                description: "- Sujet de thèse: Étude expérimentale d'une cellule d'électrolyseur à membrane échangeuse de protons (PEMWE): contribution à l'optimisation d'une Pile A Combustible Réversible (PAC-R), pour le stockage d'énergie solaire. - <BR>Travaux de recherche sur les systèmes hybrides d'EnR,  et gestion de projet. Spécialisation des systèmes de production de l'hydrogène avec réalisation de projets concrets en laboratoire.",
                 competences: [
                     "Systèmes PEMFC et PEMWE", 
                     "Gestion de Projet", 
@@ -989,25 +1048,30 @@
         };
 
         document.querySelectorAll('.diplome-item').forEach(item => {
-            item.addEventListener('mouseenter', () => {
-                document.querySelectorAll('.diplome-item').forEach(di => di.classList.remove('active'));
-                item.classList.add('active');
-                
-                const diplomeId = item.getAttribute('data-id');
-                const diplomeInfo = diplomesData[diplomeId];
-                const detailsContainer = document.querySelector('.diplome-details');
-                
-                detailsContainer.innerHTML = `
-                    <h3>${diplomeInfo.titre}</h3>
-                    <p>${diplomeInfo.description}</p>
-                    <p><strong>Compétences clés :</strong></p>
-                    <ul class="competences-list">
-                        ${diplomeInfo.competences.map(comp => `<li>${comp}</li>`).join('')}
-                    </ul>
-                    <a href="#" id="btn_diplome_box" class="btn">Voir plus</a>
-                `;
-            });
-        });
+    item.addEventListener('mouseenter', () => {
+        document.querySelectorAll('.diplome-item').forEach(di => di.classList.remove('active'));
+        item.classList.add('active');
+        
+        const diplomeId = item.getAttribute('data-id');
+        const diplomeInfo = diplomesData[diplomeId];
+        const detailsContainer = document.querySelector('.diplome-details');
+        
+        detailsContainer.innerHTML = `
+            <div class="diplome-content">
+                <h3>${diplomeInfo.titre}</h3>
+                <p>${diplomeInfo.description}</p>
+                <br>
+                <p><strong>Compétences clés :</strong></p>
+                <ul class="competences-list">
+                    ${diplomeInfo.competences.map(comp => `<li>${comp}</li>`).join('')}
+                </ul>
+            </div>
+            <div class="button-container">
+                <a href="#" id="btn_diplome_box" class="btn">Voir plus</a>
+            </div>
+        `;
+    });
+});
 
  // Données des expériences
  const experiencesData = {
@@ -1211,6 +1275,5 @@
 });
 
 </script>
-
 </body>
 </html>
