@@ -290,6 +290,7 @@
                 margin-bottom: 3rem;
             }
 
+
             .formation-contents{
                 margin-bottom: 4rem;
             }
@@ -555,6 +556,14 @@
                 margin: 0 auto;
             }
 
+            .realisation-section-title {
+                grid-column: 1 / -1; /* Fait en sorte que le titre prenne toute la largeur */
+                margin-left: 0; /* Retire la marge existante */
+                margin-bottom: 1rem;
+                margin-top: 3rem;
+                padding-left: 1rem; /* Ajoute un peu d'espace à gauche */
+            }
+
             .project-card {
                 background: white;
                 border-radius: 8px;
@@ -653,6 +662,21 @@
                 border: 1px solid #ddd;
                 border-radius: 4px;
                 font-size: 1rem;
+            }
+
+            .project-image {
+                width: 100%;
+                height: 200px; /* Ajustez cette valeur selon vos besoins */
+                background-color: #ddd;
+                position: relative; /* Ajouté pour positionner l'image */
+                overflow: hidden; /* Ajouté pour s'assurer que l'image ne dépasse pas */
+            }
+
+            .responsive-image {
+                width: 100%;
+                height: 100%;
+                object-fit: cover; /* Ajouté pour s'assurer que l'image s'adapte correctement */
+                display: block;
             }
 
             /* Animations */
@@ -844,15 +868,15 @@
     <section id="projets">
         <h2 class="section-title">Mes Réalisations</h2>
         <div class="main-projects-grid">
-            <h3 class="section-title">Universitaire</h2>
             <div class="projects-grid">
+                <h3 class="realisation-section-title">Universitaire</h3>
                 <article class="project-card">
                     <div class="project-image">
                         <iframe width="100%" height="200" src="https://www.youtube.com/embed/P9-l9bdcf2I?si=cOv079VJjfdlmKht" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
                     <div class="project-content">
-                        <h3>Projet 1</h3>
-                        <p>Description du projet. Expliquez ici ce que vous avez réalisé.</p>
+                        <h3>Robot "aux doigts et à l'oeil" (1ère étape)</h3>
+                        <p> Assemblage et programmation d'un module NXT, demi tour du robot à la détection d'un "clap" - L2 SPI, Université de La Réunion (2013) </p>
                         <a href="#" class="btn">Voir plus</a>
                     </div>
                 </article>
@@ -874,15 +898,23 @@
                 </article>
             </div>
 
-            <h3 class="section-title">Personelles</h2>
+            
                 <div class="projects-grid">
+                    <h3 class="realisation-section-title">Personnelles</h3>
                     <article class="project-card">
                         <div class="project-image">
-                            <iframe width="100%" height="200" src="https://www.youtube.com/embed/P9-l9bdcf2I?si=cOv079VJjfdlmKht" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <img src="./Pictures/woman.jpg" alt="Dessin numérique" class="responsive-image">
                         </div>
                         <div class="project-content">
-                            <h3>Projet 1</h3>
-                            <p>Description du projet. Expliquez ici ce que vous avez réalisé.</p>
+                            <h3>Dessin numérique</h3>
+                            <p>Réalisation de dessins sur ordinateur :<p>
+                                <ul class="experiences-list">
+                                    <li>- SketchBook / Photoshop</li>
+                                    <li>- Utilisation ou non d'une tablette graphique Wacom intuos PT S.</li>
+                                    <li>- Style: réaliste, humoristique, pixelart, logo, personnages ...</li>
+                                </ul>
+                                
+                                    
                             <a href="#" class="btn">Voir plus</a>
                         </div>
                     </article>
