@@ -385,6 +385,9 @@
             .competences-list li:nth-child(4) { animation-delay: 0.4s; }
             .competences-list li:nth-child(5) { animation-delay: 0.5s; }
             .competences-list li:nth-child(6) { animation-delay: 0.6s; }
+            .competences-list li:nth-child(7) { animation-delay: 0.7s; }
+            .competences-list li:nth-child(8) { animation-delay: 0.8s; }
+            .competences-list li:nth-child(9) { animation-delay: 0.9s; }
 
             /* Styles pour la section --------------------------------------Mes experiences*/
             .experiences-section {
@@ -774,7 +777,8 @@
                 <a href="#accueil">Accueil</a>
                 <a href="#diplomes">Ma Formation</a>
                 <a href="#experiences">Experiences</a>
-                <a href="#réalisations">Réalisations</a>
+                <a href="#competences">Compétences</a>
+                <a href="#projets">Réalisations</a>
                 <a href="#contact">Contact</a>
             </div>
         </nav>
@@ -985,10 +989,12 @@
                         </div>
                     </article>
                     <article class="project-card">
-                        <div class="project-image"></div>
+                        <div class="project-image">
+                            <iframe width="100%" height="200" src="https://www.youtube.com/embed/ZqnSFJjEamY?si=9TSg49uxoOSJ09Pq" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
                         <div class="project-content">
-                            <h3>Projet 2</h3>
-                            <p>Description du projet. Expliquez ici ce que vous avez réalisé.</p>
+                            <h3>Musique assitée par ordinateur</h3>
+                            <p>Utilisation de logiciels pour la création musicale</p>
                             <a href="#" class="btn">Voir plus</a>
                         </div>
                     </article>
@@ -1020,7 +1026,7 @@
         const diplomesData = {
             diplome1: {
                 titre: "Doctorat en Physique Énergétique",
-                description: "- Sujet de thèse: Étude expérimentale d'une cellule d'électrolyseur à membrane échangeuse de protons (PEMWE): contribution à l'optimisation d'une Pile A Combustible Réversible (PAC-R), pour le stockage d'énergie solaire. - <BR>Travaux de recherche sur les systèmes hybrides d'EnR,  et gestion de projet. Spécialisation des systèmes de production de l'hydrogène avec réalisation de projets concrets en laboratoire.",
+                description: "<strong>Sujet de thèse:</strong> <em>Étude expérimentale d'une cellule d'électrolyseur à membrane échangeuse de protons (PEMWE): contribution à l'optimisation d'une Pile A Combustible Réversible (PAC-R), pour le stockage d'énergie solaire.</em> <BR> </br>Travaux de recherche sur les systèmes hybrides d'EnR,  et gestion de projet. Spécialisation des systèmes de production de l'hydrogène avec réalisation de projets concrets en laboratoire.",
                 competences: [
                     "Systèmes PEMFC et PEMWE", 
                     "Gestion de Projet", 
@@ -1043,7 +1049,7 @@
             diplome3: {
                 titre: "Licence Sciences Pour L'ingénieur",
                 description: "Formation initiale en informatique couvrant les bases de la programmation, des systèmes d'information et des réseaux. Introduction aux méthodologies de développement.",
-                competences: ["Algorithmique", "Programmation", "Réseaux", "Systèmes"]
+                competences: ["Algorithmique", "Programmation", "Solide base scientifique (domaines transversales)", "Systèmes embarqués", "Électronique numérique", "Gestion de projet", "Robotique", "Calculs numériques", "Connaissance des systèmes énergétiques"]
             }
         };
 
@@ -1142,15 +1148,13 @@
                 "Echange et discution sur certaines problématique avec des experts du domaine"
             ],
             images: [
-                "./Pictures/70ansEnsma2.jpg",
-                "https://www.cge.asso.fr/wp-content/uploads/2018/09/flyer-70-ans-ISAE-ENSMA-1-re.jpg",
-                "https://www.ensma.fr/wp-content/uploads/2016/08/pano-ENSMA.jpg"
+                "https://media.grenoble-congres.com/filer_public_thumbnails/filer_public/69/83/69837600-85b5-4b09-9707-e8616839661c/logo_hyspac_2.jpg__450x250_q85_subsampling-2.jpg"
             ],
             lienSavoirPlus: "#" // URL pour en savoir plus
         },
         exp6: {
             titre: "Enseignant vacataire en environnement de calcul numérique et scientifique pour la licence 2ème année d’EEEA (Électronique Énergie Électrique Automatique)",
-            description: "Exposition et présentation sur l’étude réalisée sur la faisabilité d’une pile à combustible Réversible à trois chambres;",
+            description: "Familiarisation et approfondissement des connaissances  des étudiants en programation LabView;",
             realisations: [
                 "Réalisation de cours sur les bases de la programation LABVIEW",
                 "Travaux pratiques sur la création de VI et acquisition de données (datalogueur)"
@@ -1161,19 +1165,19 @@
             lienSavoirPlus: "#" // URL pour en savoir plus
         },
         
-    exp7: {
-            titre: "Enseignant vacataire en environnement de calcul numérique et scientifique pour la licence 2ème année d’EEEA (Électronique Énergie Électrique Automatique)",
-            description: "Exposition et présentation sur l’étude réalisée sur la faisabilité d’une pile à combustible Réversible à trois chambres;",
+        exp7: {
+            titre: "Exposant pour la Fête de la Science sur la pile à combustible",
+            description: "Exposition d’un démonstrateur d'une chaîne énergétique: des panneaux photovoltaïques jusquà la consommation en passant par un électrolyseur, une pile à combustible et un accumulateur d'énergie.",
             realisations: [
-                "Réalisation de cours sur les bases de la programation LABVIEW",
-                "Travaux pratiques sur la création de VI et acquisition de données (datalogueur)"
+                "Discours et vulgarisation scientifique au public de différents âges",
+                "Annimation et organisation du stand"
             ],
             images: [
                 "https://www.energylab.re/wp-content/uploads/2018/02/image-309-Retaill-e1538373583860.jpg "
             ],
             lienSavoirPlus: "#" // URL pour en savoir plus
-        },
-    };
+            },
+        };
 
     let currentImageIndex = 0;
     let autoplayInterval;
